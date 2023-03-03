@@ -1,0 +1,11 @@
+.element {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 282px;
+  align-items: center;
+  background-color: #FFFFFF;
+  list-style: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
