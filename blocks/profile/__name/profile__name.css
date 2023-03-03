@@ -1,6 +1,6 @@
 .profile__name {
   grid-area: name;
-  width: fit-content;
+  max-width: 294px;
   padding: 0;
   margin: 0;
   font-size: 42px;
@@ -9,4 +9,7 @@
   font-style: normal;
   color: #FFFFFF;
   align-self: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
