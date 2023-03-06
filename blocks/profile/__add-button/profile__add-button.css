@@ -11,7 +11,12 @@
   background-color: inherit;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
+  transition: opacity .4s;
 }
+  .profile__add-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
 
 @media screen and (max-width: 767px) {
   .profile__add-button {

@@ -11,7 +11,12 @@
   background-position: center;
   background-color: inherit;
   border: 1px solid #FFFFFF;
+  transition: opacity .4s;
 }
+  .profile__edit-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+  }
 
 @media screen and (max-width: 767px) {
   .profile__edit-button {
