@@ -6,4 +6,17 @@
   margin: 0;
   padding: 0;
   gap: 17px 20px;
+  list-style: none;
+}
+
+@media screen and (max-width: 900px) {
+  .elements__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .elements__list {
+    grid-template-columns: 1fr;
+  }
 }
