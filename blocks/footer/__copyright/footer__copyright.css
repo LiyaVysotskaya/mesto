@@ -8,3 +8,9 @@
   font-style: normal;
   color: #545454;
 }
+
+@media screen and (max-width: 915px) {
+  .footer__copyright {
+    font-size: 14px;
+  }
+}
