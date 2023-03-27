@@ -92,6 +92,13 @@ function addNewCard(name, link) {
   const likeBtn = newCardItem.querySelector('.element__like-button');
   likeBtn.addEventListener('click', clickLikeBtn);
 
+  //card delete function
+  const deleteBtn = newCardItem.querySelector('.element__delete-button');
+  deleteBtn.addEventListener('click', function () {
+    const removeCardItem = deleteBtn.closest('.element');
+    removeCardItem.remove();
+  });
+
   cardsContainer.append(newCardItem);
 
   return newCardItem;
@@ -100,12 +107,12 @@ function addNewCard(name, link) {
 // function to add new cards
 function handleAddCardFormSubmit (evt) {
   evt.preventDefault();
-  cardsContainer.append(addNewCard(formCardName.value, formCardDescription.value));
+  cardsContainer.prepend(addNewCard(formCardName.value, formCardDescription.value));
   closePopupWindow('.popup__place');
 }
 
 // function to add preinstalled cards
-initialCards.map(card => cardsContainer.append(addNewCard(card.name, card.link)));
+initialCards.map(card => cardsContainer.prepend(addNewCard(card.name, card.link)));
 
 // on/off like function
 function clickLikeBtn(e) {
