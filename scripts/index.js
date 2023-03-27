@@ -16,9 +16,6 @@ const closeAddCardBtn = document.querySelector('.popup__close-button_add-card');
 const cardsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#cards').content;
 const cardItem = cardTemplate.querySelector('.element');
-const cardItemImg = cardTemplate.querySelector('.element__image');
-const cardItemBasement = cardTemplate.querySelector('.element__basement');
-const cardItemTitle = cardTemplate.querySelector('.element__text');
 const formCardName = document.querySelector('.form__input_place_name');
 const formCardDescription = document.querySelector('.form__input_place_description');
 // preinstalled cards
@@ -52,8 +49,6 @@ const initialCards = [
 // full-image variables
 const fullImgPopup = document.querySelector('.popup__full-image')
 const fullImgContainer = document.querySelector('.popup__full-image_content');
-const fullImg = document.querySelector('.popup__full-image-image');
-const fullImgCaption = document.querySelector('.popup__full-image-caption');
 const closeFullImgBtn = document.querySelector('.popup__close-button_full-image');
 
 // popup opening function
@@ -91,33 +86,28 @@ function handleEditProfileFormSubmit (evt) {
 
 // function to create new cards
 function addNewCard(name, link) {
-  cardItemImg.src = link;
-  cardItemTitle.textContent = name;
-  cardItemImg.alt = name;
   const newCardItem = cardItem.cloneNode(true);
 
-  // function to open the image in full screen
-  newCardItem.addEventListener('click', function (name, link) {
-    openPopup(fullImgPopup);
-    fullImg.src = link;
-    fullImgCaption.textContent = name;
-    fullImg.alt = name;
-  });
-
-  // on/off like
+  const imgEl = newCardItem.querySelector('.element__image');
+  const titleEl = newCardItem.querySelector('.element__text');
   const likeBtn = newCardItem.querySelector('.element__like-button');
+  const deleteBtn = newCardItem.querySelector('.element__delete-button');
+
+  // fill image
+  imgEl.src = link;
+  imgEl.alt = name;
+  imgEl.addEventListener('click', () => openFullScreenImage(name, link));
+
+  // fill title
+  titleEl.textContent = name;
+
+  // add on/off like listener
   likeBtn.addEventListener('click', clickLikeBtn);
 
-  //card delete function
-  const deleteBtn = newCardItem.querySelector('.element__delete-button');
-  deleteBtn.addEventListener('click', function () {
-    const removeCardItem = deleteBtn.closest('.element');
-    removeCardItem.remove();
-  });
+  // add delete listener
+  deleteBtn.addEventListener('click', clickDeleteBtn);
 
-
-
-  cardsContainer.append(newCardItem);
+  cardsContainer.prepend(newCardItem);
 
   return newCardItem;
 }
@@ -125,17 +115,33 @@ function addNewCard(name, link) {
 // function to add new cards
 function handleAddCardFormSubmit (evt) {
   evt.preventDefault();
-  cardsContainer.prepend(addNewCard(formCardName.value, formCardDescription.value));
+  addNewCard(formCardName.value, formCardDescription.value);
   closePopupWindow('.popup__place');
 }
 
 // function to add preinstalled cards
-initialCards.map(card => cardsContainer.prepend(addNewCard(card.name, card.link)));
+initialCards.map(card => addNewCard(card.name, card.link));
 
 // on/off like function
 function clickLikeBtn(e) {
   e.target.classList.toggle('element__like-button_active');
 }
+
+//card delete function
+function clickDeleteBtn(e) {
+  const removeCardItem = e.target.closest('.element');
+  removeCardItem.remove();
+}
+
+// function to open the image in full screen
+function openFullScreenImage(name, link) {
+  openPopup(fullImgPopup);
+  const fullImg = document.querySelector('.popup__full-image-image');
+  const fullImgCaption = document.querySelector('.popup__full-image-caption');
+  fullImg.src = link;
+  fullImgCaption.textContent = name;
+  fullImg.alt = name;
+};
 
 editBtn.addEventListener('click', openEditWindow);
 addBtn.addEventListener('click', openAddWindow);
