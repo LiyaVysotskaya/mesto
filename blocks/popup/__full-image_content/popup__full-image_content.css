@@ -1,0 +1,7 @@
+.popup__full-image_content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: fit-content;
+  position: relative;
+}
