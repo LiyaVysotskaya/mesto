@@ -19,7 +19,6 @@ const cardItem = cardTemplate.querySelector('.element');
 const cardItemImg = cardTemplate.querySelector('.element__image');
 const cardItemBasement = cardTemplate.querySelector('.element__basement');
 const cardItemTitle = cardTemplate.querySelector('.element__text');
-const likeBtn = cardTemplate.querySelector('.element__like-button');
 const formCardName = document.querySelector('.form__input_place_name');
 const formCardDescription = document.querySelector('.form__input_place_description');
 // preinstalled cards
@@ -89,6 +88,10 @@ function addNewCard(name, link) {
   cardItemTitle.textContent = name;
   cardItemImg.alt = name;
   const newCardItem = cardItem.cloneNode(true);
+
+  const likeBtn = newCardItem.querySelector('.element__like-button');
+  likeBtn.addEventListener('click', clickLikeBtn);
+
   cardsContainer.append(newCardItem);
 
   return newCardItem;
@@ -106,7 +109,7 @@ initialCards.map(card => cardsContainer.append(addNewCard(card.name, card.link))
 
 // on/off like function
 function clickLikeBtn(e) {
-  e.target.classList.toggle('.element__like-button_active');
+  e.target.classList.toggle('element__like-button_active');
 }
 
 editBtn.addEventListener('click', openEditWindow);
@@ -115,4 +118,3 @@ closeEditBtn.addEventListener('click', () => closePopupWindow('.popup__profile')
 closeAddCardBtn.addEventListener('click', () => closePopupWindow('.popup__place'));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
-likeBtn.addEventListener('click', clickLikeBtn);
