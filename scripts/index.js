@@ -49,6 +49,13 @@ const initialCards = [
   }
 ];
 
+// full-image variables
+const fullImgPopup = document.querySelector('.popup__full-image')
+const fullImgContainer = document.querySelector('.popup__full-image_content');
+const fullImg = document.querySelector('.popup__full-image-image');
+const fullImgCaption = document.querySelector('.popup__full-image-caption');
+const closeFullImgBtn = document.querySelector('.popup__close-button_full-image');
+
 // popup opening function
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -89,6 +96,15 @@ function addNewCard(name, link) {
   cardItemImg.alt = name;
   const newCardItem = cardItem.cloneNode(true);
 
+  // function to open the image in full screen
+  newCardItem.addEventListener('click', function (name, link) {
+    openPopup(fullImgPopup);
+    fullImg.src = link;
+    fullImgCaption.textContent = name;
+    fullImg.alt = name;
+  });
+
+  // on/off like
   const likeBtn = newCardItem.querySelector('.element__like-button');
   likeBtn.addEventListener('click', clickLikeBtn);
 
@@ -98,6 +114,8 @@ function addNewCard(name, link) {
     const removeCardItem = deleteBtn.closest('.element');
     removeCardItem.remove();
   });
+
+
 
   cardsContainer.append(newCardItem);
 
@@ -123,5 +141,6 @@ editBtn.addEventListener('click', openEditWindow);
 addBtn.addEventListener('click', openAddWindow);
 closeEditBtn.addEventListener('click', () => closePopupWindow('.popup__profile'));
 closeAddCardBtn.addEventListener('click', () => closePopupWindow('.popup__place'));
+closeFullImgBtn.addEventListener('click', () => closePopupWindow('.popup__full-image'));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);

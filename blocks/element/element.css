@@ -12,3 +12,6 @@
   border-radius: 10px;
   overflow: hidden;
 }
+  .element:hover {
+    cursor: pointer;
+  }
