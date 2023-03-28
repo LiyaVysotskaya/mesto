@@ -3,7 +3,7 @@ const form = document.querySelector('.form');
 // profile edit variables
 const editBtn = document.querySelector('.profile__edit-button');
 const closeEditBtn = document.querySelector('.popup__close-button_edit');
-const formEdit = document.querySelector('.popup__profile');
+const formEdit = document.querySelector('.popup_profile');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const editName = document.querySelector('.form__input_profile_name');
@@ -11,7 +11,7 @@ const editDescription = document.querySelector('.form__input_profile_description
 
 // add-card variables
 const addBtn = document.querySelector('.profile__add-button');
-const formAdd = document.querySelector('.popup__place');
+const formAdd = document.querySelector('.popup_place');
 const closeAddCardBtn = document.querySelector('.popup__close-button_add-card');
 const cardsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#cards').content;
@@ -47,8 +47,8 @@ const initialCards = [
 ];
 
 // full-image variables
-const fullImgPopup = document.querySelector('.popup__full-image')
-const fullImgContainer = document.querySelector('.popup__full-image_content');
+const fullImgPopup = document.querySelector('.popup_full-image')
+const fullImgContainer = document.querySelector('.popup_full-image-content');
 const closeFullImgBtn = document.querySelector('.popup__close-button_full-image');
 
 // popup opening function
@@ -81,7 +81,7 @@ function handleEditProfileFormSubmit (evt) {
   evt.preventDefault();
   profileName.textContent = editName.value;
   profileDescription.textContent = editDescription.value;
-  closePopupWindow('.popup__profile');
+  closePopupWindow('.popup_profile');
 }
 
 // function to create new cards
@@ -116,7 +116,7 @@ function addNewCard(name, link) {
 function handleAddCardFormSubmit (evt) {
   evt.preventDefault();
   addNewCard(formCardName.value, formCardDescription.value);
-  closePopupWindow('.popup__place');
+  closePopupWindow('.popup_place');
 }
 
 // function to add preinstalled cards
@@ -145,8 +145,8 @@ function openFullScreenImage(name, link) {
 
 editBtn.addEventListener('click', openEditWindow);
 addBtn.addEventListener('click', openAddWindow);
-closeEditBtn.addEventListener('click', () => closePopupWindow('.popup__profile'));
-closeAddCardBtn.addEventListener('click', () => closePopupWindow('.popup__place'));
-closeFullImgBtn.addEventListener('click', () => closePopupWindow('.popup__full-image'));
+closeEditBtn.addEventListener('click', () => closePopupWindow('.popup_profile'));
+closeAddCardBtn.addEventListener('click', () => closePopupWindow('.popup_place'));
+closeFullImgBtn.addEventListener('click', () => closePopupWindow('.popup_full-image'));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);

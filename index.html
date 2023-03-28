@@ -37,11 +37,11 @@
       <p class="footer__copyright">&copy; 2023. Лия Высоцкая</p>
     </footer>
 
-    <div class="popup popup__profile">
+    <div class="popup popup_profile">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_edit" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="form form__edit" name="edit-profile-info" method="POST">
+        <form class="form" name="edit-profile-info" method="POST">
           <fieldset class="form__fieldset">
             <input class="form__input form__input_profile_name" name="profile-name" id="profile-name" type="text" placeholder="Имя профиля">
             <input class="form__input form__input_profile_description" name="profile-description" id="profile-description" type="text" placeholder="О себе">
@@ -51,11 +51,11 @@
       </div>
     </div>
 
-    <div class="popup popup__place">
+    <div class="popup popup_place">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_add-card" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="form form__add-card" name="add-new-card" method="POST">
+        <form class="form" name="add-new-card" method="POST">
           <fieldset class="form__fieldset">
             <input class="form__input form__input_place_name" name="card-name" id="card-name" type="text" placeholder="Название">
             <input class="form__input form__input_place_description" name="card-source" id="card-source" type="text" placeholder="Ссылка на картинку">
@@ -66,8 +66,8 @@
     </div>
   </div>
 
-  <div class="popup popup__full-image">
-    <figure class="popup__full-image_content">
+  <div class="popup popup_full-image">
+    <figure class="popup_full-image-content">
       <img class="popup__full-image-image" src="#" alt="Полное изображение">
       <figcaption class="popup__full-image-caption"></figcaption>
       <button class="popup__close-button popup__close-button_full-image" type="button"></button>
