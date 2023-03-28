@@ -43,8 +43,8 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="form" name="edit-profile-info" method="POST">
           <fieldset class="form__fieldset">
-            <input class="form__input form__input_profile_name" name="profile-name" id="profile-name" type="text" placeholder="Имя профиля">
-            <input class="form__input form__input_profile_description" name="profile-description" id="profile-description" type="text" placeholder="О себе">
+            <input class="form__input form__input_profile_name" name="profile-name" id="profile-name" type="text" placeholder="Имя профиля" required>
+            <input class="form__input form__input_profile_description" name="profile-description" id="profile-description" type="text" placeholder="О себе" required>
           </fieldset>
           <button class="form__button" type="submit">Сохранить</button>
         </form>
@@ -57,8 +57,8 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="form" name="add-new-card" method="POST">
           <fieldset class="form__fieldset">
-            <input class="form__input form__input_place_name" name="card-name" id="card-name" type="text" placeholder="Название">
-            <input class="form__input form__input_place_description" name="card-source" id="card-source" type="text" placeholder="Ссылка на картинку">
+            <input class="form__input form__input_place_name" name="card-name" id="card-name" type="text" placeholder="Название" required>
+            <input class="form__input form__input_place_description" name="card-source" id="card-source" type="text" placeholder="Ссылка на картинку" required>
           </fieldset>
           <button class="form__button" type="submit">Создать</button>
         </form>
@@ -66,10 +66,10 @@
     </div>
   </div>
 
-  <div class="popup popup_full-image">
-    <figure class="full-image">
-      <img class="full-image__image" src="#" alt="Полное изображение">
-      <figcaption class="full-image__caption"></figcaption>
+  <div class="popup popup_image">
+    <figure class="popup__full-image">
+      <img class="popup__full-image-image" src="#" alt="Полное изображение">
+      <figcaption class="popup__full-image-caption"></figcaption>
       <button class="popup__close-button popup__close-button_full-image" type="button"></button>
     </figure>
   </div>
@@ -86,5 +86,6 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/initialCards.js"></script>
 </body>
 </html>

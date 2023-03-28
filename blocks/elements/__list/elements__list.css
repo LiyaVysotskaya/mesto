@@ -1,8 +1,8 @@
 .elements__list {
   width: 100%;
+  min-height: 10%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 361px);
   grid-auto-columns: 1fr;
   grid-auto-rows: 361px;
   margin: 0;
