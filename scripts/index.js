@@ -48,7 +48,7 @@ const initialCards = [
 
 // full-image variables
 const fullImgPopup = document.querySelector('.popup_full-image')
-const fullImgContainer = document.querySelector('.popup_full-image-content');
+const fullImgContainer = document.querySelector('.full-image');
 const closeFullImgBtn = document.querySelector('.popup__close-button_full-image');
 
 // popup opening function
@@ -136,8 +136,8 @@ function clickDeleteBtn(e) {
 // function to open the image in full screen
 function openFullScreenImage(name, link) {
   openPopup(fullImgPopup);
-  const fullImg = document.querySelector('.popup__full-image-image');
-  const fullImgCaption = document.querySelector('.popup__full-image-caption');
+  const fullImg = document.querySelector('.full-image__image');
+  const fullImgCaption = document.querySelector('.full-image__caption');
   fullImg.src = link;
   fullImgCaption.textContent = name;
   fullImg.alt = name;
