@@ -94,13 +94,13 @@ function handleAddCardFormSubmit (evt) {
 initialCards.forEach(card => cardsContainer.prepend(createNewCard(card.name, card.link)));
 
 // on/off like function
-function clickLikeBtn(e) {
-  e.target.classList.toggle('element__like-button_active');
+function clickLikeBtn(evt) {
+  evt.target.classList.toggle('element__like-button_active');
 }
 
 //card delete function
-function clickDeleteBtn(e) {
-  const removeCardItem = e.target.closest('.element');
+function clickDeleteBtn(evt) {
+  const removeCardItem = evt.target.closest('.element');
   removeCardItem.remove();
 }
 
@@ -112,6 +112,15 @@ function openFullScreenImage(name, link) {
   fullImage.alt = name;
 }
 
+// popup close function by esc
+function closePopupWindowByEscape(evt) {
+  console.log(evt.key)
+  if (evt.key === "Escape") {
+    const openedWindow = document.querySelector('.popup_opened');
+    closePopupWindow(openedWindow);
+  };
+}
+
 buttonEdit.addEventListener('click', openEditWindow);
 buttonAddCard.addEventListener('click', openAddWindow);
 buttonCloseProfileEdit.addEventListener('click', () => closePopupWindow(profilePopup));
@@ -119,3 +128,5 @@ buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup)
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
+formAdd.addEventListener('keydown', closePopupWindowByEscape);
+//document.querySelectorAll('input').forEach(x => x.addEventListener('keydown', closePopupWindowByEscape));
