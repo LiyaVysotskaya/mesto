@@ -30,6 +30,7 @@ const isValid = (formElement, inputElement) => {
   }
 }
 
+// button on/off function
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add('form__button_inactive');
@@ -38,12 +39,15 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 
+
+// field validation function
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   })
 };
 
+// adding an event listener to all input fields inside a form
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
   const buttonElement = formElement.querySelector('.form__button');
@@ -57,6 +61,7 @@ const setEventListeners = (formElement) => {
   });
 }
 
+// all-form processing function
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.form'));
 
