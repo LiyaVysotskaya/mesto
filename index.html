@@ -59,8 +59,10 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="form" name="add-new-card" method="POST">
           <fieldset class="form__fieldset">
-            <input class="form__input form__input_place_name" name="card-name" id="card-name" type="text" placeholder="Название" required>
-            <input class="form__input form__input_place_description" name="card-source" id="card-source" type="text" placeholder="Ссылка на картинку" required>
+            <input class="form__input form__input_place_name" name="card-name" id="card-name" type="text" placeholder="Название" minlength="2" maxlength="30" required novalidate>
+            <span class="form__input-error card-name-error"></span>
+            <input class="form__input form__input_place_description" name="card-source" id="card-source" type="url" placeholder="Ссылка на картинку" required novalidate>
+            <span class="form__input-error card-source-error"></span>
           </fieldset>
           <button class="form__button" type="submit">Создать</button>
         </form>

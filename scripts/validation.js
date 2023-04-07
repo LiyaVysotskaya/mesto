@@ -1,8 +1,3 @@
-// form inputs variables
-const form = document.querySelector('.form');
-const formInput = form.querySelector('.form__input');
-
-
 // A function that adds a class with an error
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -70,4 +65,11 @@ const enableValidation = () => {
   });
 }
 
-enableValidation();
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+});
