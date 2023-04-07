@@ -1,5 +1,3 @@
-const form = document.querySelector('.form');
-
 // profile edit variables
 const profilePopup = document.querySelector('.popup_profile');
 const buttonEdit = document.querySelector('.profile__edit-button');
@@ -20,33 +18,6 @@ const cardTemplate = document.querySelector('#cards').content;
 const cardItem = cardTemplate.querySelector('.element');
 const formCardName = document.querySelector('.form__input_place_name');
 const formCardDescription = document.querySelector('.form__input_place_description');
-// preinstalled cards
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // full-image variables
 const imagePopup = document.querySelector('.popup_image');
@@ -139,7 +110,7 @@ function openFullScreenImage(name, link) {
   fullImage.src = link;
   fullImageCaption.textContent = name;
   fullImage.alt = name;
-};
+}
 
 buttonEdit.addEventListener('click', openEditWindow);
 buttonAddCard.addEventListener('click', openAddWindow);
