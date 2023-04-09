@@ -32,41 +32,52 @@ const escapeKey = "Escape";
 const popupList = document.querySelectorAll('.popup');
 
 // popup opening function
-function openPopup(popup) {
+const openPopup = popup => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupWindowByEscape);
 }
 
 // popup closing function
-function closePopupWindow(popup) {
+const closePopupWindow = popup => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupWindowByEscape);
 }
 
 // profile editing opening function
-function openEditWindow() {
+const openEditWindow = () => {
   openPopup(formEdit);
   formEditName.value = profileName.textContent;
   formEditDescription.value = profileDescription.textContent;
 }
 
 // function to open adding cards
-function openAddWindow() {
+const openAddWindow = () => {
   formCardName.value = null;
   formCardDescription.value = null;
   openPopup(formAdd);
 }
 
 // form submission handling function
-function handleEditProfileFormSubmit (evt) {
+const handleEditProfileFormSubmit = evt => {
   evt.preventDefault();
   profileName.textContent = formEditName.value;
   profileDescription.textContent = formEditDescription.value;
   closePopupWindow(profilePopup);
 }
 
+// on/off like function
+const clickLikeBtn = evt => {
+  evt.target.classList.toggle('element__like-button_active');
+}
+
+//card delete function
+const clickDeleteBtn = evt => {
+  const removeCardItem = evt.target.closest('.element');
+  removeCardItem.remove();
+}
+
 // function to create new cards
-function createNewCard(name, link) {
+const createNewCard = (name, link) => {
   const newCardItem = cardItem.cloneNode(true);
 
   const imageElement = newCardItem.querySelector('.element__image');
@@ -92,7 +103,7 @@ function createNewCard(name, link) {
 }
 
 // function to add new cards
-function handleAddCardFormSubmit (evt) {
+const handleAddCardFormSubmit = evt => {
   evt.preventDefault();
   cardsContainer.prepend(createNewCard(formCardName.value, formCardDescription.value));
   closePopupWindow(cardPopup);
@@ -101,19 +112,8 @@ function handleAddCardFormSubmit (evt) {
 // function to add preinstalled cards
 initialCards.forEach(card => cardsContainer.prepend(createNewCard(card.name, card.link)));
 
-// on/off like function
-function clickLikeBtn(evt) {
-  evt.target.classList.toggle('element__like-button_active');
-}
-
-//card delete function
-function clickDeleteBtn(evt) {
-  const removeCardItem = evt.target.closest('.element');
-  removeCardItem.remove();
-}
-
 // function to open the image in full screen
-function openFullScreenImage(name, link) {
+const openFullScreenImage = (name, link) => {
   openPopup(imagePopup);
   fullImage.src = link;
   fullImageCaption.textContent = name;
@@ -121,7 +121,7 @@ function openFullScreenImage(name, link) {
 }
 
 // popup close function by esc
-function closePopupWindowByEscape(evt) {
+const closePopupWindowByEscape = evt => {
   if (evt.key === escapeKey) {
     const openedWindow = document.querySelector('.popup_opened');
     closePopupWindow(openedWindow);
@@ -129,7 +129,7 @@ function closePopupWindowByEscape(evt) {
 }
 
 // popup close function by overlay click
-function closePopupWindowByOverlay(evt) {
+const closePopupWindowByOverlay = evt => {
   if (evt.target === evt.currentTarget) {
     const openedWindow = document.querySelector('.popup_opened');
     closePopupWindow(openedWindow);
@@ -143,4 +143,4 @@ buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup)
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
-popupList.forEach(popupElement => popupElement.addEventListener('click', closePopupWindowByOverlay));
+popupList.forEach(popupElement => popupElement.addEventListener('mousedown', closePopupWindowByOverlay));
