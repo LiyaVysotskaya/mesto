@@ -28,6 +28,9 @@ const fullImageCaption = document.querySelector('.popup__full-image-caption');
 // popup close function by esc variables
 const escapeKey = "Escape";
 
+// popup close function by overlay variables
+const popup = document.querySelector('.popup');
+
 // popup opening function
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -125,6 +128,14 @@ function closePopupWindowByEscape(evt) {
   };
 }
 
+// popup close function by overlay click
+function closePopupWindowByOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    const openedWindow = document.querySelector('.popup_opened');
+    closePopupWindow(openedWindow);
+  }
+}
+
 buttonEdit.addEventListener('click', openEditWindow);
 buttonAddCard.addEventListener('click', openAddWindow);
 buttonCloseProfileEdit.addEventListener('click', () => closePopupWindow(profilePopup));
@@ -132,3 +143,4 @@ buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup)
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
+popup.addEventListener('click', closePopupWindowByOverlay);
