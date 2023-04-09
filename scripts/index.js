@@ -58,7 +58,7 @@ const openAddWindow = () => {
 }
 
 // form submission handling function
-const handleEditProfileFormSubmit = evt => {
+const submitEditProfileForm = evt => {
   evt.preventDefault();
   profileName.textContent = formEditName.value;
   profileDescription.textContent = formEditDescription.value;
@@ -103,14 +103,11 @@ const createNewCard = (name, link) => {
 }
 
 // function to add new cards
-const handleAddCardFormSubmit = evt => {
+const submitAddCardForm = evt => {
   evt.preventDefault();
   cardsContainer.prepend(createNewCard(formCardName.value, formCardDescription.value));
   closePopupWindow(cardPopup);
 }
-
-// function to add preinstalled cards
-initialCards.forEach(card => cardsContainer.prepend(createNewCard(card.name, card.link)));
 
 // function to open the image in full screen
 const openFullScreenImage = (name, link) => {
@@ -136,11 +133,14 @@ const closePopupWindowByOverlay = evt => {
   }
 }
 
+// function to add preinstalled cards
+initialCards.forEach(card => cardsContainer.prepend(createNewCard(card.name, card.link)));
+
 buttonEdit.addEventListener('click', openEditWindow);
 buttonAddCard.addEventListener('click', openAddWindow);
 buttonCloseProfileEdit.addEventListener('click', () => closePopupWindow(profilePopup));
 buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup));
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
-formEdit.addEventListener('submit', handleEditProfileFormSubmit);
-formAdd.addEventListener('submit', handleAddCardFormSubmit);
+formEdit.addEventListener('submit', submitEditProfileForm);
+formAdd.addEventListener('submit', submitAddCardForm);
 popupList.forEach(popupElement => popupElement.addEventListener('mousedown', closePopupWindowByOverlay));
