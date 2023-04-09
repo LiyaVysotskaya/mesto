@@ -25,9 +25,19 @@ const buttonCloseFullImage = document.querySelector('.popup__close-button_full-i
 const fullImage = document.querySelector('.popup__full-image-image');
 const fullImageCaption = document.querySelector('.popup__full-image-caption');
 
+// popup close function by esc variables
+const escapeKey = "Escape";
+
 // popup opening function
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupWindowByEscape);
+}
+
+// popup closing function
+function closePopupWindow(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupWindowByEscape);
 }
 
 // profile editing opening function
@@ -42,11 +52,6 @@ function openAddWindow() {
   formCardName.value = null;
   formCardDescription.value = null;
   openPopup(formAdd);
-}
-
-// popup closing function
-function closePopupWindow(popup) {
-  popup.classList.remove('popup_opened');
 }
 
 // form submission handling function
@@ -114,8 +119,7 @@ function openFullScreenImage(name, link) {
 
 // popup close function by esc
 function closePopupWindowByEscape(evt) {
-  console.log(evt.key)
-  if (evt.key === "Escape") {
+  if (evt.key === escapeKey) {
     const openedWindow = document.querySelector('.popup_opened');
     closePopupWindow(openedWindow);
   };
@@ -128,5 +132,3 @@ buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup)
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
-formAdd.addEventListener('keydown', closePopupWindowByEscape);
-//document.querySelectorAll('input').forEach(x => x.addEventListener('keydown', closePopupWindowByEscape));
