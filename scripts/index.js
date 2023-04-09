@@ -29,7 +29,7 @@ const fullImageCaption = document.querySelector('.popup__full-image-caption');
 const escapeKey = "Escape";
 
 // popup close function by overlay variables
-const popup = document.querySelector('.popup');
+const popupList = document.querySelectorAll('.popup');
 
 // popup opening function
 function openPopup(popup) {
@@ -143,4 +143,4 @@ buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup)
 buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', handleEditProfileFormSubmit);
 formAdd.addEventListener('submit', handleAddCardFormSubmit);
-popup.addEventListener('click', closePopupWindowByOverlay);
+popupList.forEach(popupElement => popupElement.addEventListener('click', closePopupWindowByOverlay));
