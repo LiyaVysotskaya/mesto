@@ -1,8 +1,7 @@
 // profile edit variables
 const profilePopup = document.querySelector('.popup_profile');
 const buttonEdit = document.querySelector('.profile__edit-button');
-const buttonCloseProfileEdit = document.querySelector('.popup__close-button_edit');
-const formEdit = document.querySelector('.popup_profile');
+const formEdit = document.forms['edit-profile-info'];
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const formEditName = document.querySelector('.form__input_profile_name');
@@ -11,8 +10,7 @@ const formEditDescription = document.querySelector('.form__input_profile_descrip
 // add-card variables
 const cardPopup = document.querySelector('.popup_place');
 const buttonAddCard = document.querySelector('.profile__add-button');
-const buttonClosePopupCard = document.querySelector('.popup__close-button_add-card');
-const formAdd = document.querySelector('.popup_place');
+const formAdd = document.forms['add-new-card'];
 const cardsContainer = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('#cards').content;
 const cardItem = cardTemplate.querySelector('.element');
@@ -21,7 +19,6 @@ const formCardDescription = document.querySelector('.form__input_place_descripti
 
 // full-image variables
 const imagePopup = document.querySelector('.popup_image');
-const buttonCloseFullImage = document.querySelector('.popup__close-button_full-image');
 const fullImage = document.querySelector('.popup__full-image-image');
 const fullImageCaption = document.querySelector('.popup__full-image-caption');
 
@@ -45,16 +42,14 @@ const closePopupWindow = popup => {
 
 // profile editing opening function
 const openEditWindow = () => {
-  openPopup(formEdit);
+  openPopup(profilePopup);
   formEditName.value = profileName.textContent;
   formEditDescription.value = profileDescription.textContent;
 }
 
 // function to open adding cards
 const openAddWindow = () => {
-  formCardName.value = null;
-  formCardDescription.value = null;
-  openPopup(formAdd);
+  openPopup(cardPopup);
 }
 
 // form submission handling function
@@ -107,6 +102,7 @@ const submitAddCardForm = evt => {
   evt.preventDefault();
   cardsContainer.prepend(createNewCard(formCardName.value, formCardDescription.value));
   closePopupWindow(cardPopup);
+  evt.target.reset();
 }
 
 // function to open the image in full screen
@@ -128,19 +124,23 @@ const closePopupWindowByEscape = evt => {
 // popup close function by overlay click
 const closePopupWindowByOverlay = evt => {
   if (evt.target === evt.currentTarget) {
-    const openedWindow = document.querySelector('.popup_opened');
-    closePopupWindow(openedWindow);
+    closePopupWindow(evt.currentTarget);
   }
 }
 
 // function to add preinstalled cards
 initialCards.forEach(card => cardsContainer.prepend(createNewCard(card.name, card.link)));
 
+popupList.forEach(popup => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
+      closePopupWindow(popup);
+    }
+  });
+});
+
+
 buttonEdit.addEventListener('click', openEditWindow);
 buttonAddCard.addEventListener('click', openAddWindow);
-buttonCloseProfileEdit.addEventListener('click', () => closePopupWindow(profilePopup));
-buttonClosePopupCard.addEventListener('click', () => closePopupWindow(cardPopup));
-buttonCloseFullImage.addEventListener('click', () => closePopupWindow(imagePopup));
 formEdit.addEventListener('submit', submitEditProfileForm);
 formAdd.addEventListener('submit', submitAddCardForm);
-popupList.forEach(popupElement => popupElement.addEventListener('mousedown', closePopupWindowByOverlay));
