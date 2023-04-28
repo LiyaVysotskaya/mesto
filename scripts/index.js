@@ -44,9 +44,10 @@ const closePopupWindow = popup => {
 
 // profile editing opening function
 const openEditWindow = () => {
-  openPopup(profilePopup);
+  formEdit.reset();   // генерируем событие для очистки ошибок у полей
   formEditName.value = profileName.textContent;
   formEditDescription.value = profileDescription.textContent;
+  openPopup(profilePopup);
 }
 
 // function to open adding cards
