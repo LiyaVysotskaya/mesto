@@ -1,5 +1,6 @@
-import { initialCards } from "./initialCards.js";
+import { initialCards, validationSettings } from "./data.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
 // profile edit variables
 const profilePopup = document.querySelector('.popup_profile');
@@ -101,6 +102,12 @@ popupList.forEach(popup => {
       closePopupWindow(popup);
     }
   });
+});
+
+const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+formList.forEach(formElement => {
+  const formValidator = new FormValidator(validationSettings, formElement);
+  formValidator.enableValidation();
 });
 
 buttonEdit.addEventListener('click', openEditWindow);
