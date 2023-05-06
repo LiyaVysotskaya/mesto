@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* Интро\r * Ссылка на готовый сайт\r * Использованные технологии\r * В планах по доработке проекта",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiyaVysotskaya/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LiyaVysotskaya/mesto/issues"
+  },
+  "homepage": "https://github.com/LiyaVysotskaya/mesto#readme"
+}
