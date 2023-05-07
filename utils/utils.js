@@ -1,5 +1,7 @@
 import { profilePopup, profileName, profileDescription, formEditName, formEditDescription, cardPopup,
-formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption, escapeKey } from "../utils/constants.js";
+formCardName, formCardDescription } from "../utils/constants.js";
+
+//imagePopup, fullImage, fullImageCaption, escapeKey
 
 import Card from "../components/Card.js";
 
@@ -52,12 +54,12 @@ const submitAddCardForm = (evt, section) => {
 }
 
 // function to open the image in full screen
-const openFullScreenImage = (name, link) => {
-  fullImage.src = link;
-  fullImageCaption.textContent = name;
-  fullImage.alt = name;
-  openPopup(imagePopup);
-}
+// const openFullScreenImage = (name, link) => {
+//   fullImage.src = link;
+//   fullImageCaption.textContent = name;
+//   fullImage.alt = name;
+//   openPopup(imagePopup);
+// }
 
 // popup close function by esc
 // const closePopupWindowByEscape = evt => {
@@ -67,7 +69,6 @@ const openFullScreenImage = (name, link) => {
 //   };
 // }
 
-// openPopup, closePopupWindow,
+// openPopup, closePopupWindow, openFullScreenImage
 
-export { openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm,
-openFullScreenImage };
+export { openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm };

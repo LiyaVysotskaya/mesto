@@ -1,13 +1,15 @@
 import { initialCards, validationSettings, buttonEdit, formEdit, buttonAddCard, formAdd, popupList } from "../utils/constants.js";
 
-import { closePopupWindow, openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm } from "../utils/utils.js"
+import { openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm } from "../utils/utils.js"
 
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import Popup from "../components/Popup.js"
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const cardsSection = new Section({ items: initialCards, renderer: createNewCard }, '.elements__list');
 cardsSection.renderElements();
+
+const popupFullImage = new PopupWithImage('.popup_image');
 
 popupList.forEach(popup => {
   popup.addEventListener('mousedown', (evt) => {
