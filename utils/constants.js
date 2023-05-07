@@ -56,12 +56,8 @@ const imagePopup = document.querySelector('.popup_image');
 const fullImage = document.querySelector('.popup__full-image-image');
 const fullImageCaption = document.querySelector('.popup__full-image-caption');
 
-// popup close function by esc variables
-const escapeKey = "Escape";
-
 // popup close function by overlay variables
 const popupList = document.querySelectorAll('.popup');
 
 export { initialCards, validationSettings, profilePopup, buttonEdit, formEdit, profileName, profileDescription, formEditName, formEditDescription,
-cardPopup, buttonAddCard, formAdd, cardsContainer, formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption,
-escapeKey, popupList };
+cardPopup, buttonAddCard, formAdd, cardsContainer, formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption, popupList };

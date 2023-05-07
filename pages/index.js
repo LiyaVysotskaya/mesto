@@ -1,20 +1,23 @@
-import { initialCards, validationSettings, buttonEdit, formEdit, buttonAddCard, formAdd, popupList } from "../utils/constants.js";
+import { initialCards, validationSettings, buttonEdit, formEdit, buttonAddCard, formAdd } from "../utils/constants.js";
 
-import { closePopupWindow, openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm } from "../utils/utils.js"
+import { openEditWindow, openAddWindow, submitEditProfileForm, submitAddCardForm } from "../utils/utils.js"
 
+import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
-const cardsSection = new Section({ items: initialCards, renderer: createNewCard }, '.elements__list');
+const popupFullImage = new PopupWithImage('.popup_image');
+popupFullImage.setEventListeners();
+
+const cardsSection = new Section(
+    { items: initialCards, renderer: (cardData) => new Card(
+        { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage) },
+        '#cards'
+       ).generateNewCard() },
+    '.elements__list'
+   );
 cardsSection.renderElements();
-
-popupList.forEach(popup => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
-      closePopupWindow(popup);
-    }
-  });
-});
 
 const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 formList.forEach(formElement => {
