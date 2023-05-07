@@ -1,19 +1,19 @@
 import { profilePopup, profileName, profileDescription, formEditName, formEditDescription, cardPopup,
-cardsContainer, formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption, escapeKey } from "../utils/constants.js";
+formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption, escapeKey } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
 
 // popup opening function
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupWindowByEscape);
-}
+// const openPopup = popup => {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', closePopupWindowByEscape);
+// }
 
 // popup closing function
-const closePopupWindow = popup => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupWindowByEscape);
-}
+// const closePopupWindow = popup => {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closePopupWindowByEscape);
+// }
 
 // profile editing opening function
 const openEditWindow = () => {
@@ -60,12 +60,14 @@ const openFullScreenImage = (name, link) => {
 }
 
 // popup close function by esc
-const closePopupWindowByEscape = evt => {
-  if (evt.key === escapeKey) {
-    const openedWindow = document.querySelector('.popup_opened');
-    closePopupWindow(openedWindow);
-  };
-}
+// const closePopupWindowByEscape = evt => {
+//   if (evt.key === escapeKey) {
+//     const openedWindow = document.querySelector('.popup_opened');
+//     closePopupWindow(openedWindow);
+//   };
+// }
 
-export { openPopup, closePopupWindow, openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm,
-openFullScreenImage, closePopupWindowByEscape };
+// openPopup, closePopupWindow,
+
+export { openEditWindow, openAddWindow, submitEditProfileForm, createNewCard, submitAddCardForm,
+openFullScreenImage };

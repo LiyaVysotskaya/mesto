@@ -4,6 +4,7 @@ import { closePopupWindow, openEditWindow, openAddWindow, submitEditProfileForm,
 
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js"
 
 const cardsSection = new Section({ items: initialCards, renderer: createNewCard }, '.elements__list');
 cardsSection.renderElements();
