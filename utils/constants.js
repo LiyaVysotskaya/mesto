@@ -35,7 +35,7 @@ const validationSettings = {
 }
 
 // profile edit variables
-const profilePopup = document.querySelector('.popup_profile');
+const profilePopupSelector = '.popup_profile';
 const buttonEdit = document.querySelector('.profile__edit-button');
 const formEdit = document.forms['edit-profile-info'];
 const profileName = document.querySelector('.profile__name');
@@ -59,5 +59,5 @@ const fullImageCaption = document.querySelector('.popup__full-image-caption');
 // popup close function by overlay variables
 const popupList = document.querySelectorAll('.popup');
 
-export { initialCards, validationSettings, profilePopup, buttonEdit, formEdit, profileName, profileDescription, formEditName, formEditDescription,
+export { initialCards, validationSettings, profilePopupSelector, buttonEdit, formEdit, profileName, profileDescription, formEditName, formEditDescription,
 cardPopup, buttonAddCard, formAdd, cardsContainer, formCardName, formCardDescription, imagePopup, fullImage, fullImageCaption, popupList };
