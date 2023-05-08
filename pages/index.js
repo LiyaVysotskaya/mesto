@@ -1,4 +1,5 @@
-import { initialCards, validationSettings, buttonEdit, buttonAddCard, profilePopupSelector } from "../utils/constants.js";
+import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, profilePopupSelector, imagePopupSelector, cardAddPopupSelector,
+  templateSelector, profileName, profileDescription, cardsContainerSelector, formCardName, formCardDescription, formList } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -7,35 +8,34 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
-const userInfo = new UserInfo({ profileName: '.profile__name', profileDescription: '.profile__description' });
+const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription });
 
-const popupFullImage = new PopupWithImage('.popup_image');
+const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
 
 const getCard = cardData => new Card(
       { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage) },
-      '#cards'
+      templateSelector
       );
 
 const cardsSection = new Section(
     { items: initialCards, renderer: cardData => getCard(cardData).generateNewCard() },
-    '.elements__list'
+    cardsContainerSelector
    );
 cardsSection.renderElements();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, userInfo.setUserInfo);
 popupProfile.setEventListeners();
 
-const popupPlace = new PopupWithForm('.popup_place', values => cardsSection.addItem({ name: values['card-name'], link: values['card-source'] }));
+const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
 popupPlace.setEventListeners();
 
-const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 formList.forEach(formElement => {
   const formValidator = new FormValidator(validationSettings, formElement);
   formValidator.enableValidation();
 });
 
-buttonEdit.addEventListener('click', () => {
+buttonEditProfile.addEventListener('click', () => {
   popupProfile.setInputValues(userInfo.getUserInfo());
   popupProfile.open();
 });
