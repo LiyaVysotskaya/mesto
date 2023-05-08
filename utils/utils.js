@@ -1,32 +1,14 @@
-import { profilePopup, profileName, profileDescription, formEditName, formEditDescription, cardPopup,
-formCardName, formCardDescription } from "../utils/constants.js";
+import { profileName, profileDescription, formCardName, formCardDescription } from "../utils/constants.js";
 
-// profile editing opening function
-const openEditWindow = () => {
-  openPopup(profilePopup);
-  formEditName.value = profileName.textContent;
-  formEditDescription.value = profileDescription.textContent;
-}
-
-// function to open adding cards
-const openAddWindow = () => {
-  openPopup(cardPopup);
-}
-
-// form submission handling function
-const submitEditProfileForm = evt => {
+const submitEditProfileForm = (evt, values) => {
   evt.preventDefault();
-  profileName.textContent = formEditName.value;
-  profileDescription.textContent = formEditDescription.value;
-  closePopupWindow(profilePopup);
+  profileName.textContent = values['profile-name'];
+  profileDescription.textContent = values['profile-description'];
 }
 
-// function to add new cards
-const submitAddCardForm = (evt, section) => {
+const submitAddCardForm = (evt, values, section) => {
   evt.preventDefault();
-  section.addItem({ name: formCardName.value, link: formCardDescription.value });
-  closePopupWindow(cardPopup);
-  evt.target.reset();
+  section.addItem({ name: values['card-name'], link: values['card-source'] });
 }
 
-export { openEditWindow, openAddWindow, submitEditProfileForm, submitAddCardForm };
+export { submitEditProfileForm, submitAddCardForm };
