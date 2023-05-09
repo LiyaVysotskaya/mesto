@@ -1,7 +1,9 @@
 import '../pages/index.css';
 
-import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, profilePopupSelector, imagePopupSelector, cardAddPopupSelector,
-  templateSelector, profileName, profileDescription, cardsContainerSelector, formCardName, formCardDescription, formList } from "../utils/constants.js";
+import { initialCards, validationSettings, buttonEditProfile, buttonAddCard,
+  profilePopupSelector, imagePopupSelector, cardAddPopupSelector, templateSelector,
+  profileName, profileDescription, cardsContainerSelector, formCardName,
+  formCardDescription, formEditProfile, formAddCard } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
@@ -32,10 +34,11 @@ popupProfile.setEventListeners();
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
 popupPlace.setEventListeners();
 
-formList.forEach(formElement => {
-  const formValidator = new FormValidator(validationSettings, formElement);
-  formValidator.enableValidation();
-})
+const editProfilePopupValidation = new FormValidator(validationSettings, formEditProfile);
+editProfilePopupValidation.enableValidation();
+
+const addCardPopupValidation = new FormValidator(validationSettings, formAddCard);
+addCardPopupValidation.enableValidation();
 
 buttonEditProfile.addEventListener('click', () => {
   popupProfile.setInputValues(userInfo.getUserInfo());
