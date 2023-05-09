@@ -33,10 +33,10 @@ popupPlace.setEventListeners();
 formList.forEach(formElement => {
   const formValidator = new FormValidator(validationSettings, formElement);
   formValidator.enableValidation();
-});
+})
 
 buttonEditProfile.addEventListener('click', () => {
   popupProfile.setInputValues(userInfo.getUserInfo());
   popupProfile.open();
-});
-buttonAddCard.addEventListener('click', popupPlace.open);
+})
+buttonAddCard.addEventListener('click', popupPlace.open)
