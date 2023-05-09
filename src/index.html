@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
   <div class="page__container">
 
     <header class="header centered">
-      <a href="https://liyavysotskaya.github.io/mesto/"><img class="header__logo" src="./images/logo.svg" alt="Логотип Место"></a>
+      <a href="https://liyavysotskaya.github.io/mesto/"><img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место"></a>
     </header>
 
     <main>
 
       <section class="profile centered" aria-label="Секция с профилем">
-        <img class="profile__image" src="./images/avatar.jpg" alt="Аватар-изображение">
+        <img class="profile__image" src="<%=require('./images/avatar.jpg')%>" alt="Аватар-изображение">
         <div class="profile__info">
           <div class="profile__container">
             <h1 class="profile__name">Высоцкая</h1>
@@ -89,6 +88,5 @@
     </article>
   </template>
 
-  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

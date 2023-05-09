@@ -1,7 +1,9 @@
+import '../pages/index.css';
+
 import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, profilePopupSelector, imagePopupSelector, cardAddPopupSelector,
   templateSelector, profileName, profileDescription, cardsContainerSelector, formCardName, formCardDescription, formList } from "../utils/constants.js";
 
-import Card from "../components/Card.js";
+import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
