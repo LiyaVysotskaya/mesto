@@ -29,6 +29,7 @@ export const profilePopupSelector = '.popup_profile';
 export const cardAddPopupSelector = '.popup_place';
 export const imagePopupSelector = '.popup_image';
 export const avatarPopupSelector = '.popup_avatar';
+export const deleteConfirmPopupSelector = '.popup_delete-card';
 export const templateSelector = '#cards';
 export const cardsContainerSelector = '.elements__list';
 export const profileName = '.profile__name';

@@ -1,7 +1,7 @@
 import '../pages/index.css';
 
 import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
-  profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, templateSelector,
+  profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
   profileName, profileDescription, cardsContainerSelector, formCardName,
   formCardDescription, formValidators, formAvatarImage, avatarImage } from "../utils/constants.js";
 
@@ -10,12 +10,15 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupConfirmCardDeletion from "../components/PopupConfirmCardDeletion.js"
 import UserInfo from "../components/UserInfo.js";
 
 const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription });
 
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
+
+const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, )
 
 const getCardElement = cardData => new Card(
       { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage) },
