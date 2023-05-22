@@ -3,7 +3,7 @@ import '../pages/index.css';
 import { initialCards, validationSettings, buttonEditProfile, buttonAddCard,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, templateSelector,
   profileName, profileDescription, cardsContainerSelector, formCardName,
-  formCardDescription, formEditProfile, formAddCard } from "../utils/constants.js";
+  formCardDescription, formEditProfile, formAddCard, formValidators } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
@@ -17,13 +17,13 @@ const userInfo = new UserInfo({ profileName: profileName, profileDescription: pr
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
 
-const getCard = cardData => new Card(
+const getCardElement = cardData => new Card(
       { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage) },
       templateSelector
-      );
+      ).getElement();
 
 const cardsSection = new Section(
-    { items: initialCards, renderer: cardData => getCard(cardData).generateNewCard() },
+    { items: initialCards, renderer: cardData => getCardElement(cardData) },
     cardsContainerSelector
    );
 cardsSection.renderElements();
@@ -34,11 +34,18 @@ popupProfile.setEventListeners();
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
 popupPlace.setEventListeners();
 
-const editProfilePopupValidation = new FormValidator(validationSettings, formEditProfile);
-editProfilePopupValidation.enableValidation();
+const enableValidation = validationSettings => {
+  const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationSettings, formElement);
+    const formName = formElement.getAttribute('name');
 
-const addCardPopupValidation = new FormValidator(validationSettings, formAddCard);
-addCardPopupValidation.enableValidation();
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationSettings);
 
 buttonEditProfile.addEventListener('click', () => {
   popupProfile.setInputValues(userInfo.getUserInfo());

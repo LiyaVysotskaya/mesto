@@ -23,6 +23,8 @@ export const validationSettings = {
   errorClass: 'form__input-error_active'
 }
 
+export const formValidators = {};
+
 export const profilePopupSelector = '.popup_profile';
 export const cardAddPopupSelector = '.popup_place';
 export const imagePopupSelector = '.popup_image';
