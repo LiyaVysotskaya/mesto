@@ -15,6 +15,7 @@
     <main>
 
       <section class="profile centered" aria-label="Секция с профилем">
+        <button type="button"></button>
         <img class="profile__image" src="<%=require('./images/avatar.jpg')%>" alt="Аватар-изображение">
         <div class="profile__info">
           <div class="profile__container">
@@ -67,14 +68,39 @@
         </form>
       </div>
     </div>
-  </div>
 
-  <div class="popup popup_image">
-    <figure class="popup__full-image">
-      <img class="popup__full-image-image" src="#" alt="Полное изображение">
-      <figcaption class="popup__full-image-caption"></figcaption>
-      <button class="popup__close-button" type="button"></button>
-    </figure>
+    <div class="popup popup_image">
+      <figure class="popup__full-image">
+        <img class="popup__full-image-image" src="#" alt="Полное изображение">
+        <figcaption class="popup__full-image-caption"></figcaption>
+        <button class="popup__close-button" type="button"></button>
+      </figure>
+    </div>
+
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="form" name="edit-avatar-image" method="POST">
+          <fieldset class="form__fieldset">
+            <input class="form__input form__input_avatar_link" name="avatar-image" id="avatar-image" type="url" placeholder="Ссылка на картинку" required novalidate>
+            <span class="form__input-error avatar-image-error"></span>
+          </fieldset>
+          <button class="form__button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_delete-card">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="form" name="delete-card" method="POST">
+          <button class="form__button" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+
   </div>
 
   <template id="cards">
