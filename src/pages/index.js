@@ -1,9 +1,9 @@
 import '../pages/index.css';
 
-import { initialCards, validationSettings, buttonEditProfile, buttonAddCard,
-  profilePopupSelector, imagePopupSelector, cardAddPopupSelector, templateSelector,
+import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
+  profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, templateSelector,
   profileName, profileDescription, cardsContainerSelector, formCardName,
-  formCardDescription, formEditProfile, formAddCard, formValidators } from "../utils/constants.js";
+  formCardDescription, formValidators, formAvatarImage, avatarImage } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
@@ -34,6 +34,11 @@ popupProfile.setEventListeners();
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
 popupPlace.setEventListeners();
 
+const popupAvatar = new PopupWithForm(avatarPopupSelector, data => {
+  avatarImage.src = data[formAvatarImage];
+});
+popupAvatar.setEventListeners();
+
 const enableValidation = validationSettings => {
   const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
   formList.forEach((formElement) => {
@@ -51,4 +56,5 @@ buttonEditProfile.addEventListener('click', () => {
   popupProfile.setInputValues(userInfo.getUserInfo());
   popupProfile.open();
 })
-buttonAddCard.addEventListener('click', popupPlace.open)
+buttonAddCard.addEventListener('click', popupPlace.open);
+buttonEditAvatar.addEventListener('click', popupAvatar.open);

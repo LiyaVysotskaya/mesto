@@ -28,16 +28,19 @@ export const formValidators = {};
 export const profilePopupSelector = '.popup_profile';
 export const cardAddPopupSelector = '.popup_place';
 export const imagePopupSelector = '.popup_image';
+export const avatarPopupSelector = '.popup_avatar';
 export const templateSelector = '#cards';
 export const cardsContainerSelector = '.elements__list';
 export const profileName = '.profile__name';
 export const profileDescription = '.profile__description';
 export const formCardName = 'card-name';
 export const formCardDescription = 'card-source';
+export const formAvatarImage = 'avatar-image';
+
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
+export const buttonEditAvatar = document.querySelector('.avatar__edit-button');
+export const avatarImage = document.querySelector('.profile__image');
 export const profilePopup = document.querySelector(profilePopupSelector);
 export const cardAddPopup = document.querySelector(cardAddPopupSelector);
-export const formEditProfile = profilePopup.querySelector('.form');
-export const formAddCard = cardAddPopup.querySelector('.form');
