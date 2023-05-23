@@ -18,10 +18,11 @@ const userInfo = new UserInfo({ profileName: profileName, profileDescription: pr
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
 
-const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, )
+const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector);
+popupConfirmDelete.setEventListeners();
 
 const getCardElement = cardData => new Card(
-      { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage) },
+      { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage), popupConfirmDelete: popupConfirmDelete },
       templateSelector
       ).getElement();
 

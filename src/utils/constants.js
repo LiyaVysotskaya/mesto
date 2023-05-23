@@ -42,6 +42,7 @@ export const formAvatarImage = 'avatar-image';
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
 export const buttonEditAvatar = document.querySelector('.avatar__edit-button');
+// export const buttonDeleteCardList = document.querySelectorAll('.element__delete-button');
 export const avatarImage = document.querySelector('.profile__image');
 export const profilePopup = document.querySelector(profilePopupSelector);
 export const cardAddPopup = document.querySelector(cardAddPopupSelector);
