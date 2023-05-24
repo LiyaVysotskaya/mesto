@@ -42,6 +42,7 @@ export const templateSelector = '#cards';
 export const cardsContainerSelector = '.elements__list';
 export const profileName = '.profile__name';
 export const profileDescription = '.profile__description';
+export const profileAvatar = '.profile__image';
 export const formCardName = 'card-name';
 export const formCardDescription = 'card-source';
 export const formAvatarImage = 'avatar-image';

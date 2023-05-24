@@ -1,6 +1,6 @@
 .profile__avatar-button {
-  max-width: 120px;
-  max-height: 120px;
+  width: 120px;
+  height: 120px;
   margin: 0;
   padding: 0;
   display: flex;

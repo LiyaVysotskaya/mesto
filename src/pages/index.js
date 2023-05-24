@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
-  profileName, profileDescription, cardsContainerSelector, formCardName,
+  profileName, profileDescription, profileAvatar, cardsContainerSelector, formCardName,
   formCardDescription, formValidators, formAvatarImage, avatarImage, apiSettings } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
@@ -14,15 +14,12 @@ import PopupConfirmCardDeletion from "../components/PopupConfirmCardDeletion.js"
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
 
-const apiAuthorization = new Api(apiSettings);
-apiAuthorization.getUserData()
-  .then(res => console.log(res))
+const api = new Api(apiSettings);
 
-const apiGetCards = new Api(apiSettings);
-apiGetCards.getCardsArray()
-  .then(res => console.log(res))
+const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription, profileAvatar: profileAvatar });
 
-const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription });
+api.getUserData()
+  .then(res => userInfo.setUserInfo({['profile-name']: res.name, ['profile-description']: res.about, ['profile__image']: res.avatar }))
 
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();

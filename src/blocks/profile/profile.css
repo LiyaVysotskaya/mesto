@@ -1,8 +1,10 @@
 .profile {
   display: flex;
   max-width: 880px;
+  max-height: 120px;
   width: 100%;
-  padding-top: 40px;
+  height: 100%;
+  margin-top: 40px;
   align-items: center;
 }
 
@@ -10,6 +12,6 @@
   .profile {
     flex-direction: column;
     max-width: 282px;
-    padding-top: 42px;
+    margin-top: 42px;
   }
 }
