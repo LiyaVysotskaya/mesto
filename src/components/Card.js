@@ -37,9 +37,8 @@ export default class Card {
     evt.target.classList.toggle('element__like-button_active');
   }
 
-  _clickDeleteBtn(evt) {
+  _clickDeleteBtn() {
     this._popupConfirmDelete.open(this._deleteCard);
-    // evt.target.closest('.element').remove();
   }
 
   _deleteCard() {

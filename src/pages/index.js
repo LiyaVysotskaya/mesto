@@ -32,11 +32,14 @@ const getCardElement = cardData => new Card(
       templateSelector
       ).getElement();
 
-const cardsSection = new Section(
-    { items: initialCards, renderer: cardData => getCardElement(cardData) },
+let cardsSection;
+api.getCardsArray().then(res => {
+  cardsSection  = new Section(
+    { items: res, renderer: cardData => getCardElement(cardData) },
     cardsContainerSelector
    );
-cardsSection.renderElements();
+  cardsSection.renderElements();
+});
 
 const popupProfile = new PopupWithForm(profilePopupSelector, userInfo.setUserInfo);
 popupProfile.setEventListeners();
