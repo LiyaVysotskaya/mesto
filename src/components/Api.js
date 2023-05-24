@@ -22,4 +22,24 @@ export default class Api {
         console.log(`Ошибка: ${err}`);
       });
   }
+
+  getCardsArray() {
+    return fetch(`${this._url}/cards`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
+
 }

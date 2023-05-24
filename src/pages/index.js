@@ -15,6 +15,12 @@ import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
 
 const apiAuthorization = new Api(apiSettings);
+apiAuthorization.getUserData()
+  .then(res => console.log(res))
+
+const apiGetCards = new Api(apiSettings);
+apiGetCards.getCardsArray()
+  .then(res => console.log(res))
 
 const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription });
 
