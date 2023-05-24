@@ -1,26 +1,15 @@
-const arkhyzImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg';
-const chelyabinskImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg';
-const ivanovoImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg';
-const camchatkaImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg';
-const holmogorskyiImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg';
-const baikalImage = 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg';
-
-export const initialCards = [
-  { name: 'Архыз', link: arkhyzImage },
-  { name: 'Челябинская область', link: chelyabinskImage },
-  { name: 'Иваново',  link: ivanovoImage },
-  { name: 'Камчатка', link: camchatkaImage },
-  { name: 'Холмогорский район', link: holmogorskyiImage },
-  { name: 'Байкал', link: baikalImage }
-];
-
 export const apiSettings = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
   headers: {
     authorization: 'a107eb49-22ca-4876-bbd0-47e31c345082',
     'Content-Type': 'application/json'
-  }
+  },
+  body: JSON.stringify({
+    name: '',
+    about: ''
+  })
 }
+
 
 export const validationSettings = {
   formSelector: '.form',

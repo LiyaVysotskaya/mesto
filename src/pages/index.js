@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { initialCards, validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
+import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
   profileName, profileDescription, profileAvatar, cardsContainerSelector, formCardName,
   formCardDescription, formValidators, formAvatarImage, avatarImage, apiSettings } from "../utils/constants.js";
@@ -33,7 +33,8 @@ const getCardElement = cardData => new Card(
       ).getElement();
 
 let cardsSection;
-api.getCardsArray().then(res => {
+api.getCardsArray()
+  .then(res => {
   cardsSection  = new Section(
     { items: res, renderer: cardData => getCardElement(cardData) },
     cardsContainerSelector
@@ -41,7 +42,12 @@ api.getCardsArray().then(res => {
   cardsSection.renderElements();
 });
 
-const popupProfile = new PopupWithForm(profilePopupSelector, userInfo.setUserInfo);
+const popupProfile = new PopupWithForm(profilePopupSelector, data => {
+  api.editProfileInfo(data)
+  .then(res => {
+    userInfo.setUserInfo({['profile-name']: res.name, ['profile-description']: res.about, ['profile__image']: res.avatar })
+  })
+});
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
