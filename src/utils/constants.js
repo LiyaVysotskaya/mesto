@@ -14,6 +14,14 @@ export const initialCards = [
   { name: 'Байкал', link: baikalImage }
 ];
 
+export const apiSettings = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: 'a107eb49-22ca-4876-bbd0-47e31c345082',
+    'Content-Type': 'application/json'
+  }
+}
+
 export const validationSettings = {
   formSelector: '.form',
   inputSelector: '.form__input',
