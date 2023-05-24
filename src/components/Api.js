@@ -13,13 +13,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }
-      })
+      .then(this._then)
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
@@ -31,13 +25,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
+    .then(this._then)
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     });
@@ -52,18 +40,32 @@ export default class Api {
         about: data['profile-description']
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-      }
-    })
+    .then(this._then)
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     });
   }
 
+  editAvatarImage(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data['avatar-image']
+      })
+    })
+    .then(this._then)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
 
+  _then(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+  }
 
 }

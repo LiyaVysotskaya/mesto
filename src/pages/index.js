@@ -18,8 +18,7 @@ const api = new Api(apiSettings);
 
 const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription, profileAvatar: profileAvatar });
 
-api.getUserData()
-  .then(res => userInfo.setUserInfo({['profile-name']: res.name, ['profile-description']: res.about, ['profile__image']: res.avatar }))
+api.getUserData().then(userInfo.setUserInfo)
 
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
@@ -42,20 +41,13 @@ api.getCardsArray()
   cardsSection.renderElements();
 });
 
-const popupProfile = new PopupWithForm(profilePopupSelector, data => {
-  api.editProfileInfo(data)
-  .then(res => {
-    userInfo.setUserInfo({['profile-name']: res.name, ['profile-description']: res.about, ['profile__image']: res.avatar })
-  })
-});
+const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
 popupPlace.setEventListeners();
 
-const popupAvatar = new PopupWithForm(avatarPopupSelector, data => {
-  avatarImage.src = data[formAvatarImage];
-});
+const popupAvatar = new PopupWithForm(avatarPopupSelector, data => api.editAvatarImage(data).then(userInfo.setUserInfo));
 popupAvatar.setEventListeners();
 
 const enableValidation = validationSettings => {
