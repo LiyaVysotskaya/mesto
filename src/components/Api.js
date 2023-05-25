@@ -60,6 +60,21 @@ export default class Api {
     });
   }
 
+  addNewCard(data) {
+    return fetch(`${this._url}/cards `, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data['card-name'],
+        link: data['card-source']
+      })
+    })
+    .then(this._then)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
   _then(res) {
     if (res.ok) {
       return res.json();

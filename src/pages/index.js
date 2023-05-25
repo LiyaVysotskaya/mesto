@@ -34,17 +34,20 @@ const getCardElement = cardData => new Card(
 let cardsSection;
 api.getCardsArray()
   .then(res => {
-  cardsSection  = new Section(
-    { items: res, renderer: cardData => getCardElement(cardData) },
-    cardsContainerSelector
-   );
-  cardsSection.renderElements();
+    cardsSection  = new Section(
+      { items: res, renderer: cardData => getCardElement(cardData) },
+      cardsContainerSelector
+    );
+    cardsSection.renderElements();
 });
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
 popupProfile.setEventListeners();
 
-const popupPlace = new PopupWithForm(cardAddPopupSelector, values => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }));
+const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
+  api.addNewCard(values)
+    .then( () => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }))
+});
 popupPlace.setEventListeners();
 
 const popupAvatar = new PopupWithForm(avatarPopupSelector, data => api.editAvatarImage(data).then(userInfo.setUserInfo));
