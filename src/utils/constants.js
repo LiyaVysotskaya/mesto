@@ -34,12 +34,12 @@ export const profileDescription = '.profile__description';
 export const profileAvatar = '.profile__image';
 export const formCardName = 'card-name';
 export const formCardDescription = 'card-source';
-export const formAvatarImage = 'avatar-image';
+export const identifier = '646f683f9e6b3f0636989f11';
 
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
 export const buttonEditAvatar = document.querySelector('.profile__avatar-button');
-export const avatarImage = document.querySelector('.profile__image');
+export const buttonDeleteCard = document.querySelector('.element__delete-button');
 export const profilePopup = document.querySelector(profilePopupSelector);
 export const cardAddPopup = document.querySelector(cardAddPopupSelector);

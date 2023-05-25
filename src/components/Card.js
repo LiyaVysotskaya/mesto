@@ -2,6 +2,8 @@ export default class Card {
   constructor({ data, handleCardClick, popupConfirmDelete }, templateSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._cardOwnerid = data.owner._id;
+    this._id = 'e4a24a7ddd17785f2e38c891';
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._popupConfirmDelete = popupConfirmDelete;
@@ -24,6 +26,9 @@ export default class Card {
   }
 
   getElement() {
+    if (this._cardOwnerid != this._id) {
+      this._deleteButton.style.display = 'none';
+    }
     return this._card;
   }
 

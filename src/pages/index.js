@@ -3,7 +3,7 @@ import '../pages/index.css';
 import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
   profileName, profileDescription, profileAvatar, cardsContainerSelector, formCardName,
-  formCardDescription, formValidators, formAvatarImage, avatarImage, apiSettings } from "../utils/constants.js";
+  formCardDescription, formValidators, apiSettings, identifier, buttonDeleteCard } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
