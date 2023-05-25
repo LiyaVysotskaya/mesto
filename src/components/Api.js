@@ -75,6 +75,28 @@ export default class Api {
     });
   }
 
+  likeCard(data) {
+    return fetch(`${this._url}/cards/${data._id}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(this._then)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
+  unlikeCard(data) {
+    return fetch(`${this._url}/cards/${data._id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._then)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
   _then(res) {
     if (res.ok) {
       return res.json();

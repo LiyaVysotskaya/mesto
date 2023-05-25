@@ -27,7 +27,7 @@ export default class Card {
 
   getElement() {
     if (this._cardOwnerid != this._id) {
-      this._deleteButton.style.display = 'none';
+      this._deleteButton.remove();
     }
     return this._card;
   }
