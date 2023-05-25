@@ -1,9 +1,10 @@
 export default class Card {
   constructor({ data, handleCardClick, popupConfirmDelete }, templateSelector) {
+    console.log(data)
     this._name = data.name;
     this._link = data.link;
     this._cardOwnerid = data.owner._id;
-    this._id = 'e4a24a7ddd17785f2e38c891';
+    this._id = data.myIdentifier;
     this._cardId = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -27,7 +28,7 @@ export default class Card {
   }
 
   getElement() {
-    if (this._cardOwnerid != this._id) {
+    if (this._cardOwnerid !== this._id) {
       this._deleteButton.remove();
     }
     return this._card;

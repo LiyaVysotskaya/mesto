@@ -3,7 +3,7 @@ import '../pages/index.css';
 import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
   profileName, profileDescription, profileAvatar, cardsContainerSelector, formCardName,
-  formCardDescription, formValidators, apiSettings, identifier, buttonDeleteCard } from "../utils/constants.js";
+  formCardDescription, formValidators, apiSettings, identifier } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
@@ -31,6 +31,7 @@ const getCardElement = cardData => new Card(
 let cardsSection;
 api.getCardsArray()
   .then(res => {
+    res.forEach(card => card.myIdentifier = identifier);
     cardsSection  = new Section(
       { items: res, renderer: cardData => getCardElement(cardData) },
       cardsContainerSelector
@@ -39,9 +40,9 @@ api.getCardsArray()
 });
 
 const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, card => {
-//   api.deleteCard(card._id)
-//     .then(() => card._deleteCard())
-// });
+  api.deleteCard(card._id)
+    .then(() => card._deleteCard())
+});
 popupConfirmDelete.setEventListeners();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
