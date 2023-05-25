@@ -23,9 +23,6 @@ api.getUserData().then(userInfo.setUserInfo)
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
 
-const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector);
-popupConfirmDelete.setEventListeners();
-
 const getCardElement = cardData => new Card(
       { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage), popupConfirmDelete: popupConfirmDelete },
       templateSelector
@@ -41,12 +38,18 @@ api.getCardsArray()
     cardsSection.renderElements();
 });
 
+const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, card => {
+//   api.deleteCard(card._id)
+//     .then(() => card._deleteCard())
+// });
+popupConfirmDelete.setEventListeners();
+
 const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
   api.addNewCard(values)
-    .then( () => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }))
+    .then(() => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription] }))
 });
 popupPlace.setEventListeners();
 

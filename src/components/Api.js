@@ -75,10 +75,12 @@ export default class Api {
     });
   }
 
-  likeCard(data) {
-    return fetch(`${this._url}/cards/${data._id}/likes`, {
-      method: 'PUT',
-      headers: this._headers
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
     })
     .then(this._then)
     .catch((err) => {
@@ -86,10 +88,25 @@ export default class Api {
     });
   }
 
-  unlikeCard(data) {
-    return fetch(`${this._url}/cards/${data._id}/likes`, {
+  likeCard(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(this._then)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
+  unlikeCard(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        authorization: this._token
+      }
     })
     .then(this._then)
     .catch((err) => {

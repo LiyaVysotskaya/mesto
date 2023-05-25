@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._cardOwnerid = data.owner._id;
     this._id = 'e4a24a7ddd17785f2e38c891';
+    this._cardId = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._popupConfirmDelete = popupConfirmDelete;
