@@ -10,10 +10,12 @@ export default class Card {
     this._titleElement = this._card.querySelector('.element__text');
     this._likeButton = this._card.querySelector('.element__like-button');
     this._deleteButton = this._card.querySelector('.element__delete-button');
+    this._likesElement = this._card.querySelector('.element__like-info');
 
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
+    this._likesElement.textContent = data.likes.length;
 
     this._clickDeleteBtn = this._clickDeleteBtn.bind(this);
     this._deleteCard = this._deleteCard.bind(this);
