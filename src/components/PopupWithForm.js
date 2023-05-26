@@ -5,7 +5,12 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitFormFunction = submitFormFunction;
     this._fieldset = this._popup.querySelector('.form__fieldset');
+    this._submitButton = this._popup.querySelector('.form__button');
     this._inputs = this._fieldset.querySelectorAll('.form__input');
+
+    this._submitButtonDefaulText = this._submitButton.textContent;
+    // console.log(this._submitButtonDefaulText)
+
     this.close = this.close.bind(this);
     this._getInputValues = this._getInputValues.bind(this);
     this._submitHandle = this._submitHandle.bind(this);
@@ -26,6 +31,12 @@ export default class PopupWithForm extends Popup {
     this._inputs.forEach(input => {
       input.value = values[input.name];
     })
+  }
+
+  renderLoading(isLoading, loadingText = 'Сохранение...') {
+    isLoading
+      ? this._submitButton.textContent = loadingText
+      : this._submitButton.textContent = this._submitButtonDefaulText;
   }
 
   _submitHandle(evt) {

@@ -4,6 +4,8 @@ import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
   profileName, profileDescription, profileAvatar, cardsContainerSelector, formValidators, apiSettings, identifier } from "../utils/constants.js";
 
+import { handleSubmit } from "../utils/utils.js"
+
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -42,19 +44,33 @@ api.getCardsArray()
     cardsSection.renderElements();
 });
 
-const popupConfirmDelete = new PopupConfirm(deleteConfirmPopupSelector, card => api.deleteCard(card.id).then(card.delete));
+const popupConfirmDelete = new PopupConfirm(deleteConfirmPopupSelector, card => {
+  function makeRequest() {
+    return api.deleteCard(card.id).then(card.delete)};
+    handleSubmit(makeRequest, popupProfile)}
+  );
 popupConfirmDelete.setEventListeners();
 
-const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
+const popupProfile = new PopupWithForm(profilePopupSelector, data => {
+  function makeRequest() {
+    return api.editProfileInfo(data).then(userInfo.setUserInfo)};
+    handleSubmit(makeRequest, popupProfile)}
+    );
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
-  api.addNewCard(values)
-    .then(res => cardsSection.addItem({...res, myIdentifier: identifier}, false));
-});
+  function makeRequest() {
+    return api.addNewCard(values)
+      .then(res => cardsSection.addItem({...res, myIdentifier: identifier}, false))};
+      handleSubmit(makeRequest, popupProfile)}
+      );
 popupPlace.setEventListeners();
 
-const popupAvatar = new PopupWithForm(avatarPopupSelector, data => api.editAvatarImage(data).then(userInfo.setUserInfo));
+const popupAvatar = new PopupWithForm(avatarPopupSelector, data => {
+  function makeRequest() {
+    return api.editAvatarImage(data).then(userInfo.setUserInfo)};
+    handleSubmit(makeRequest, popupProfile)}
+  );
 popupAvatar.setEventListeners();
 
 const enableValidation = validationSettings => {
