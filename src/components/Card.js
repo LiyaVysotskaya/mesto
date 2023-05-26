@@ -1,6 +1,6 @@
 export default class Card {
-  constructor({ data, handleCardClick, popupConfirmDelete }, templateSelector) {
-    // console.log(data)
+  constructor( data, handleCardClick, handleDeleteClick, handleLikeClick, handleUnlikeClick, templateSelector) {
+    console.log(data)
     this.id = data._id;
 
     this._name = data.name;
@@ -9,7 +9,11 @@ export default class Card {
     this._currentUserId = data.myIdentifier;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
-    this._popupConfirmDelete = popupConfirmDelete;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleUnlikeClick = handleUnlikeClick;
+    this._isLiked = data.likes.some(user => user._id === data.myIdentifier);
+
     this._element = this._getTemplate();
     this._imageElement = this._element.querySelector('.element__image');
     this._titleElement = this._element.querySelector('.element__text');
@@ -17,14 +21,19 @@ export default class Card {
     this._deleteButton = this._element.querySelector('.element__delete-button');
     this._likesElement = this._element.querySelector('.element__like-info');
 
+     this._isLiked
+       ? this._likeButton.classList.add('element__like-button_active')
+       : this._likeButton.classList.remove('element__like-button_active');
+
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
-    this._likesElement.textContent = data.likes.length;
 
     this.delete = this.delete.bind(this);
     this._clickDeleteBtn = this._clickDeleteBtn.bind(this);
+    this._clickLikeBtn = this._clickLikeBtn.bind(this);
 
+    this._setLikeCount(data.likes);
     this._setEventListeners();
   }
 
@@ -48,11 +57,22 @@ export default class Card {
   }
 
   _clickLikeBtn(evt) {
-    evt.target.classList.toggle('element__like-button_active');
+    const handle = this._isLiked
+    ? this._handleUnlikeClick
+    : this._handleLikeClick;
+    handle(this.id).then(res => {
+      evt.target.classList.toggle('element__like-button_active');
+      this._isLiked = !this._isLiked;
+      this._setLikeCount(res.likes);
+    })
   }
 
   _clickDeleteBtn() {
-    this._popupConfirmDelete.open(this);
+    this._handleDeleteClick(this);
+  }
+
+  _setLikeCount(likes) {
+    this._likesElement.textContent = likes.length;
   }
 
   _setEventListeners() {

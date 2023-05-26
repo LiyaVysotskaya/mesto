@@ -23,7 +23,11 @@ const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
 
 const getCardElement = cardData => new Card(
-      { data: cardData, handleCardClick: popupFullImage.open.bind(popupFullImage), popupConfirmDelete: popupConfirmDelete },
+      cardData,
+      popupFullImage.open.bind(popupFullImage),
+      popupConfirmDelete.open.bind(popupConfirmDelete),
+      api.likeCard.bind(api),
+      api.unlikeCard.bind(api),
       templateSelector
       ).getElement();
 
