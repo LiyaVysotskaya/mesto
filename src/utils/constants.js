@@ -5,8 +5,6 @@ export const apiSettings = {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    name: '',
-    about: ''
   })
 }
 
@@ -32,8 +30,6 @@ export const cardsContainerSelector = '.elements__list';
 export const profileName = '.profile__name';
 export const profileDescription = '.profile__description';
 export const profileAvatar = '.profile__image';
-export const formCardName = 'card-name';
-export const formCardDescription = 'card-source';
 export const identifier = 'e4a24a7ddd17785f2e38c891';
 
 

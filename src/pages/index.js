@@ -2,15 +2,14 @@ import '../pages/index.css';
 
 import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
-  profileName, profileDescription, profileAvatar, cardsContainerSelector, formCardName,
-  formCardDescription, formValidators, apiSettings, identifier } from "../utils/constants.js";
+  profileName, profileDescription, profileAvatar, cardsContainerSelector, formValidators, apiSettings, identifier } from "../utils/constants.js";
 
 import Card from "../components/Card.js"
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import PopupConfirmCardDeletion from "../components/PopupConfirmCardDeletion.js"
+import PopupConfirm from "../components/PopupConfirm.js"
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
 
@@ -38,13 +37,13 @@ api.getCardsArray()
     );
     cardsSection.renderElements();
 });
-// !!!
-const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, card => api.deleteCard(card.id).then(card.delete));
+
+const popupConfirmDelete = new PopupConfirm(deleteConfirmPopupSelector, card => api.deleteCard(card.id).then(card.delete));
 popupConfirmDelete.setEventListeners();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
 popupProfile.setEventListeners();
-// !!!
+
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
   api.addNewCard(values)
     .then(res => cardsSection.addItem({...res, myIdentifier: identifier}, false));
