@@ -39,10 +39,7 @@ api.getCardsArray()
     cardsSection.renderElements();
 });
 // !!!
-const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, data => {
-  api.deleteCard(data)
-    .then(getCardElement._deleteCard(data))
-});
+const popupConfirmDelete = new PopupConfirmCardDeletion(deleteConfirmPopupSelector, card => api.deleteCard(card.id).then(card.delete));
 popupConfirmDelete.setEventListeners();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => api.editProfileInfo(data).then(userInfo.setUserInfo));
@@ -50,7 +47,7 @@ popupProfile.setEventListeners();
 // !!!
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
   api.addNewCard(values)
-    .then(() => cardsSection.addItem({ name: values[formCardName], link: values[formCardDescription], myIdentifier: identifier, owner: {id: identifier}, likes: {length} }))
+    .then(res => cardsSection.addItem({...res, myIdentifier: identifier}, false));
 });
 popupPlace.setEventListeners();
 

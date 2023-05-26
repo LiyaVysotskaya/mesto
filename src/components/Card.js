@@ -1,40 +1,45 @@
 export default class Card {
   constructor({ data, handleCardClick, popupConfirmDelete }, templateSelector) {
-    console.log(data)
+    // console.log(data)
+    this.id = data._id;
+
     this._name = data.name;
     this._link = data.link;
-    this._cardOwnerid = data.owner._id;
-    this._id = data.myIdentifier;
-    this._cardId = data._id;
+    this._ownerId = data.owner._id;
+    this._currentUserId = data.myIdentifier;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._popupConfirmDelete = popupConfirmDelete;
-    this._card = this._getTemplateCard();
-    this._imageElement = this._card.querySelector('.element__image');
-    this._titleElement = this._card.querySelector('.element__text');
-    this._likeButton = this._card.querySelector('.element__like-button');
-    this._deleteButton = this._card.querySelector('.element__delete-button');
-    this._likesElement = this._card.querySelector('.element__like-info');
+    this._element = this._getTemplate();
+    this._imageElement = this._element.querySelector('.element__image');
+    this._titleElement = this._element.querySelector('.element__text');
+    this._likeButton = this._element.querySelector('.element__like-button');
+    this._deleteButton = this._element.querySelector('.element__delete-button');
+    this._likesElement = this._element.querySelector('.element__like-info');
 
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
     this._likesElement.textContent = data.likes.length;
 
+    this.delete = this.delete.bind(this);
     this._clickDeleteBtn = this._clickDeleteBtn.bind(this);
-    this._deleteCard = this._deleteCard.bind(this);
 
     this._setEventListeners();
   }
 
-  getElement() {
-    if (this._cardOwnerid !== this._id) {
-      this._deleteButton.remove();
-    }
-    return this._card;
+  delete() {
+    this._element.remove();
   }
 
-  _getTemplateCard() {
+  getElement() {
+    if (this._ownerId !== this._currentUserId) {
+      this._deleteButton.remove();
+    }
+    return this._element;
+  }
+
+  _getTemplate() {
     return document
       .querySelector(this._templateSelector)
       .content
@@ -47,11 +52,7 @@ export default class Card {
   }
 
   _clickDeleteBtn() {
-    this._popupConfirmDelete.open(this._deleteCard);
-  }
-
-  _deleteCard() {
-    this._card.remove();
+    this._popupConfirmDelete.open(this);
   }
 
   _setEventListeners() {

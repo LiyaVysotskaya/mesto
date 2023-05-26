@@ -14,14 +14,14 @@ export default class PopupConfirmCardDeletion extends Popup {
     this._form.addEventListener('submit', this._submitHandle);
   }
 
-  open(submitFunction) {
+  open(card) {
     super.open();
-    this._submitFormFunction = submitFunction;
+    this._card = card;
   }
 
   _submitHandle(evt) {
     evt.preventDefault();
-    this._submitFormFunction();
+    this._submitFormFunction(this._card);
     this.close();
   }
 }
