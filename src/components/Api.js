@@ -13,10 +13,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(this._then)
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
+      .then(this._checkResponse);
   }
 
   getCardsArray() {
@@ -25,10 +22,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   editProfileInfo(data) {
@@ -40,10 +34,7 @@ export default class Api {
         about: data['profile-description']
       })
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   editAvatarImage(data) {
@@ -54,10 +45,7 @@ export default class Api {
         avatar: data['avatar-image']
       })
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   addNewCard(data) {
@@ -69,10 +57,7 @@ export default class Api {
         link: data['card-source']
       })
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   deleteCard(id) {
@@ -82,10 +67,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   likeCard(id) {
@@ -95,10 +77,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
   unlikeCard(id) {
@@ -108,13 +87,10 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(this._then)
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    });
+    .then(this._checkResponse);
   }
 
-  _then(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {

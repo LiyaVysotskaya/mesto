@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { validationSettings, buttonEditProfile, buttonAddCard, buttonEditAvatar,
   profilePopupSelector, imagePopupSelector, cardAddPopupSelector, avatarPopupSelector, deleteConfirmPopupSelector, templateSelector,
-  profileName, profileDescription, profileAvatar, cardsContainerSelector, formValidators, apiSettings, identifier } from "../utils/constants.js";
+  profileName, profileDescription, profileAvatar, cardsContainerSelector, formValidators, apiSettings } from "../utils/constants.js";
 
 import { handleSubmit } from "../utils/utils.js"
 
@@ -17,9 +17,25 @@ import Api from '../components/Api.js';
 
 const api = new Api(apiSettings);
 
+let userId;
+let cardsSection;
+
 const userInfo = new UserInfo({ profileName: profileName, profileDescription: profileDescription, profileAvatar: profileAvatar });
 
-api.getUserData().then(userInfo.setUserInfo)
+api.getUserData().then(res => {
+  userId = res._id;
+  userInfo.setUserInfo(res);
+
+  api.getCardsArray()
+    .then(res => {
+      res.forEach(card => card.myIdentifier = userId);
+      cardsSection  = new Section(
+        { items: res, renderer: cardData => getCardElement(cardData) },
+        cardsContainerSelector
+      );
+      cardsSection.renderElements();
+  });
+});
 
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
@@ -28,49 +44,29 @@ const getCardElement = cardData => new Card(
       cardData,
       popupFullImage.open.bind(popupFullImage),
       popupConfirmDelete.open.bind(popupConfirmDelete),
-      api.likeCard.bind(api),
-      api.unlikeCard.bind(api),
+      (cardId, successHandle) => api.likeCard(cardId).then(successHandle).catch(console.error),
+      (cardId, successHandle) => api.unlikeCard(cardId).then(successHandle).catch(console.error),
       templateSelector
       ).getElement();
 
-let cardsSection;
-api.getCardsArray()
-  .then(res => {
-    res.forEach(card => card.myIdentifier = identifier);
-    cardsSection  = new Section(
-      { items: res, renderer: cardData => getCardElement(cardData) },
-      cardsContainerSelector
-    );
-    cardsSection.renderElements();
-});
-
 const popupConfirmDelete = new PopupConfirm(deleteConfirmPopupSelector, card => {
-  function makeRequest() {
-    return api.deleteCard(card.id).then(card.delete)};
-    handleSubmit(makeRequest, popupProfile)}
-  );
+  handleSubmit(api.deleteCard(card.id).then(card.delete), popupConfirmDelete);
+});
 popupConfirmDelete.setEventListeners();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => {
-  function makeRequest() {
-    return api.editProfileInfo(data).then(userInfo.setUserInfo)};
-    handleSubmit(makeRequest, popupProfile)}
-    );
+  handleSubmit(api.editProfileInfo(data).then(userInfo.setUserInfo), popupProfile);
+});
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
-  function makeRequest() {
-    return api.addNewCard(values)
-      .then(res => cardsSection.addItem({...res, myIdentifier: identifier}, false))};
-      handleSubmit(makeRequest, popupProfile)}
-      );
+  handleSubmit(api.addNewCard(values).then(res => cardsSection.addItem({...res, myIdentifier: userId}, false)), popupPlace);
+});
 popupPlace.setEventListeners();
 
 const popupAvatar = new PopupWithForm(avatarPopupSelector, data => {
-  function makeRequest() {
-    return api.editAvatarImage(data).then(userInfo.setUserInfo)};
-    handleSubmit(makeRequest, popupProfile)}
-  );
+  handleSubmit(api.editAvatarImage(data).then(userInfo.setUserInfo), popupAvatar);
+});
 popupAvatar.setEventListeners();
 
 const enableValidation = validationSettings => {

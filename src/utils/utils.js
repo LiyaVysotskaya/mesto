@@ -1,7 +1,7 @@
-export function handleSubmit(request, popup) {
-  popup.renderLoading(true);
-  request()
-    .then(popup.close())
+export function handleSubmit(request, popup, loadingText = 'Сохранение...') {
+  popup.renderLoading(true, loadingText);
+  request
+    .then(popup.close)
     .catch(console.error)
-    .finally(popup.renderLoading(false))
+    .finally(() => popup.renderLoading(false));
 }

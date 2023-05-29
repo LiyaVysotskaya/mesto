@@ -8,7 +8,6 @@ export const apiSettings = {
   })
 }
 
-
 export const validationSettings = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -30,8 +29,6 @@ export const cardsContainerSelector = '.elements__list';
 export const profileName = '.profile__name';
 export const profileDescription = '.profile__description';
 export const profileAvatar = '.profile__image';
-export const identifier = 'e4a24a7ddd17785f2e38c891';
-
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');

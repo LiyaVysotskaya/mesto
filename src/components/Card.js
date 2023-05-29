@@ -56,14 +56,17 @@ export default class Card {
   }
 
   _clickLikeBtn(evt) {
-    const handle = this._isLiked
+    const clickHandle = this._isLiked
     ? this._handleUnlikeClick
     : this._handleLikeClick;
-    handle(this.id).then(res => {
+
+    const successHandle = (res) => {
       evt.target.classList.toggle('element__like-button_active');
       this._isLiked = !this._isLiked;
       this._setLikeCount(res.likes);
-    })
+    }
+
+    clickHandle(this.id, successHandle);
   }
 
   _clickDeleteBtn() {

@@ -9,7 +9,6 @@ export default class PopupWithForm extends Popup {
     this._inputs = this._fieldset.querySelectorAll('.form__input');
 
     this._submitButtonDefaulText = this._submitButton.textContent;
-    // console.log(this._submitButtonDefaulText)
 
     this.close = this.close.bind(this);
     this._getInputValues = this._getInputValues.bind(this);
@@ -33,16 +32,19 @@ export default class PopupWithForm extends Popup {
     })
   }
 
-  renderLoading(isLoading, loadingText = 'Сохранение...') {
-    isLoading
-      ? this._submitButton.textContent = loadingText
-      : this._submitButton.textContent = this._submitButtonDefaulText;
+  renderLoading(isLoading, loadingText) {
+    if(isLoading){
+      this._submitButton.classList.add('form__button_inactive');
+      this._submitButton.textContent = loadingText;
+    }else{
+      this._submitButton.classList.remove('form__button_inactive');
+      this._submitButton.textContent = this._submitButtonDefaulText;
+    }
   }
 
   _submitHandle(evt) {
     evt.preventDefault();
     this._submitFormFunction(this._getInputValues());
-    this.close();
   }
 
   _getInputValues() {
