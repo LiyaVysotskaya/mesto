@@ -34,8 +34,10 @@ api.getUserData().then(res => {
         cardsContainerSelector
       );
       cardsSection.renderElements();
-  });
-});
+  })
+  .catch(console.error);
+})
+.catch(console.error);
 
 const popupFullImage = new PopupWithImage(imagePopupSelector);
 popupFullImage.setEventListeners();
@@ -50,22 +52,30 @@ const getCardElement = cardData => new Card(
       ).getElement();
 
 const popupConfirmDelete = new PopupConfirm(deleteConfirmPopupSelector, card => {
-  handleSubmit(api.deleteCard(card.id).then(card.delete), popupConfirmDelete);
+  handleSubmit(api.deleteCard(card.id)
+    .then(card.delete)
+    .catch(console.error), popupConfirmDelete);
 });
 popupConfirmDelete.setEventListeners();
 
 const popupProfile = new PopupWithForm(profilePopupSelector, data => {
-  handleSubmit(api.editProfileInfo(data).then(userInfo.setUserInfo), popupProfile);
+  handleSubmit(api.editProfileInfo(data)
+    .then(userInfo.setUserInfo)
+    .catch(console.error), popupProfile);
 });
 popupProfile.setEventListeners();
 
 const popupPlace = new PopupWithForm(cardAddPopupSelector, values => {
-  handleSubmit(api.addNewCard(values).then(res => cardsSection.addItem({...res, myIdentifier: userId}, false)), popupPlace);
+  handleSubmit(api.addNewCard(values)
+    .then(res => cardsSection.addItem({...res, myIdentifier: userId}, false))
+    .catch(console.error), popupPlace);
 });
 popupPlace.setEventListeners();
 
 const popupAvatar = new PopupWithForm(avatarPopupSelector, data => {
-  handleSubmit(api.editAvatarImage(data).then(userInfo.setUserInfo), popupAvatar);
+  handleSubmit(api.editAvatarImage(data)
+    .then(userInfo.setUserInfo)
+    .catch(console.error), popupAvatar);
 });
 popupAvatar.setEventListeners();
 
